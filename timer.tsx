@@ -10,16 +10,11 @@ export function Timer(): JSX.Element {
     useEffect( ()=>{
         const timer = setInterval( ()=>{
             setSeconds((prevSecond) => {
-
                 if(prevSecond===59){
-
-                    setMinutes( (prevMinute)=>{
-
+                    setMinutes((prevMinute)=>{
                         if (prevMinute === 59){
-                            setHours((prevHour)=>{
-                                prevHour+=1;
-                                return 0; //reset minutes to 0
-                            } )
+                            setHours((prevHour)=>prevHour+=1)
+                            return 0; //reset minutes to 0 
                         }
                         return prevMinute +=1;
                     })  
@@ -32,8 +27,9 @@ export function Timer(): JSX.Element {
         return () => clearInterval(timer);
     }, [])
 
+
     return (
-        <div className={css.HomeArea}>
+        <div className={css.Timer}>
             <p>
                 {String(hours).padStart(2, "0")}: //pads the string with '0' until the length becomes 2
                 {String(minutes).padStart(2, "0")}:
